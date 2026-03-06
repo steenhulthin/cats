@@ -218,14 +218,6 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-with st.expander("Technology stack", expanded=False):
-    st.markdown(
-        """
-Powered by [TheCatAPI](https://thecatapi.com/) and [catfact.ninja](https://catfact.ninja/).
-
-Image source: [TheCatAPI](https://thecatapi.com/). Copyright belongs to the respective image owners. This app shows source attribution and does not claim ownership of the images. No explicit per-image watermark requirement was identified in TheCatAPI Terms/Privacy.
-"""
-    )
 
 
 # Keep a stable batch of cats/fact across reruns
@@ -267,6 +259,16 @@ st.markdown(
     f"<div class='carousel-meta'>\U0001F43E Cat {current_idx + 1} / {len(cat_urls)}</div></div>",
     unsafe_allow_html=True,
 )
+with st.expander("Technology stack", expanded=False):
+    st.markdown(
+        """
+Powered by [TheCatAPI](https://thecatapi.com/) and [catfact.ninja](https://catfact.ninja/).
+
+Stack (short): Python 3, Streamlit UI, `requests` for HTTP, local JSON fallback files in `api_cache/`, and a timed auto-advance carousel using Streamlit reruns.
+
+Image source: [TheCatAPI](https://thecatapi.com/). Copyright belongs to the respective image owners. This app shows source attribution and does not claim ownership of the images. No explicit per-image watermark requirement was identified in TheCatAPI Terms/Privacy.
+"""
+    )
 
 # Auto-advance the carousel every 5 seconds
 time.sleep(5)
