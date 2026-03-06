@@ -73,7 +73,7 @@ def get_cat_fact() -> str:
 # ------------------------------------------------------------
 # 2) Streamlit UI
 # ------------------------------------------------------------
-st.set_page_config(page_title="\U0001F43E Cat Carousel", layout="centered")
+st.set_page_config(page_title="\U0001F43E Cat Carousel", layout="centered", page_icon=":heart_eyes_cat:")
 st.markdown(
     """
 <style>
