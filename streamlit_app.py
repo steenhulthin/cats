@@ -186,6 +186,41 @@ st.markdown(
         font-weight: 700;
         font-family: "Trebuchet MS", "Segoe UI", sans-serif;
     }
+    div[data-testid="stExpander"] {
+        margin-top: 0.9rem;
+    }
+    div[data-testid="stExpander"] details {
+        border: 2px solid #f0b45f;
+        border-radius: 14px;
+        background: rgba(255, 248, 233, 0.95);
+        overflow: hidden;
+    }
+    div[data-testid="stExpander"] summary {
+        background: linear-gradient(135deg, #ffd8ba 0%, #ffc3d4 100%);
+        color: #4b332a;
+        font-weight: 800;
+        padding: 0.55rem 0.8rem;
+    }
+    div[data-testid="stExpander"] summary:hover {
+        filter: brightness(0.97);
+    }
+    div[data-testid="stExpander"] summary:focus-visible {
+        outline: 3px solid #7b4b2b;
+        outline-offset: 2px;
+    }
+    div[data-testid="stExpander"] summary p {
+        color: #4b332a;
+    }
+    div[data-testid="stExpander"] summary svg {
+        fill: #4b332a;
+    }
+    div[data-testid="stExpander"] [data-testid="stMarkdownContainer"] p {
+        color: #5a3f33;
+    }
+    div[data-testid="stExpander"] a {
+        color: #7b4b2b;
+        font-weight: 700;
+    }
     @media (max-width: 640px) {
         .hero-top {
             align-items: flex-start;
