@@ -58,7 +58,7 @@ while True:
     # Show the current slice (4 images)
     slice_urls = cat_urls[idx: idx + 4]
     for col, img_url in zip(cols, slice_urls):
-        col.image(img_url, use_column_width=True)
+        col.image(img_url, width="stretch")
 
     # Advance index (wrap around)
     idx = (idx + 4) % len(cat_urls)
