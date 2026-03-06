@@ -186,30 +186,6 @@ st.markdown(
         font-weight: 700;
         font-family: "Trebuchet MS", "Segoe UI", sans-serif;
     }
-    .ack-card {
-        margin-top: 0.75rem;
-        background: rgba(255, 255, 255, 0.8);
-        border: 2px dotted rgba(90, 63, 51, 0.24);
-        border-radius: 16px;
-        padding: 0.65rem 0.85rem;
-        color: #5a3f33;
-        font-size: 0.92rem;
-        font-weight: 600;
-        line-height: 1.35;
-        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-    }
-    .legal-note {
-        margin-top: 0.5rem;
-        color: #6d4a3f;
-        font-size: 0.82rem;
-        line-height: 1.35;
-        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-    }
-    .legal-note a, .ack-card a {
-        color: #7b4b2b;
-        font-weight: 700;
-        text-decoration: underline;
-    }
     @media (max-width: 640px) {
         .hero-top {
             align-items: flex-start;
@@ -242,15 +218,14 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-st.markdown(
-    """
-<div class="ack-card">
-  Powered by <a href="https://thecatapi.com/" target="_blank">TheCatAPI</a>
-  and <a href="https://catfact.ninja/" target="_blank">catfact.ninja</a>.
-</div>
-""",
-    unsafe_allow_html=True,
-)
+with st.expander("Technology stack", expanded=False):
+    st.markdown(
+        """
+Powered by [TheCatAPI](https://thecatapi.com/) and [catfact.ninja](https://catfact.ninja/).
+
+Image source: [TheCatAPI](https://thecatapi.com/). Copyright belongs to the respective image owners. This app shows source attribution and does not claim ownership of the images. No explicit per-image watermark requirement was identified in TheCatAPI Terms/Privacy.
+"""
+    )
 
 
 # Keep a stable batch of cats/fact across reruns
@@ -290,17 +265,6 @@ carousel_placeholder.image(
 )
 st.markdown(
     f"<div class='carousel-meta'>\U0001F43E Cat {current_idx + 1} / {len(cat_urls)}</div></div>",
-    unsafe_allow_html=True,
-)
-st.markdown(
-    """
-<div class="legal-note">
-  Image source: <a href="https://thecatapi.com/" target="_blank">TheCatAPI</a>.
-  Copyright belongs to the respective image owners.
-  This app shows source attribution and does not claim ownership of the images.
-  No explicit per-image watermark requirement was identified in TheCatAPI Terms/Privacy.
-</div>
-""",
     unsafe_allow_html=True,
 )
 
