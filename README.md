@@ -51,4 +51,11 @@ References:
 - Local JSON fallback files in `api_cache/`
 - Streamlit rerun loop for carousel timing
 
+## License 📜
+
+This project is licensed under the **GNU Affero General Public License v3.0 (or later)**.  
+See [LICENSE](LICENSE) for the full text.
+
+Third-party API content (including cat images/facts) remains subject to the rights and terms of its respective providers/owners.
+
 Now go forth and deploy the floof. 🐈💫
