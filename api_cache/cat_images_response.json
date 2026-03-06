@@ -1,17 +1,62 @@
 [
   {
-    "url": "https://cataas.com/cat?width=900&height=600"
+    "id": "18l",
+    "url": "https://cdn2.thecatapi.com/images/18l.gif",
+    "width": 500,
+    "height": 287
   },
   {
-    "url": "https://cataas.com/cat/cute?width=900&height=600"
+    "id": "3qu",
+    "url": "https://cdn2.thecatapi.com/images/3qu.jpg",
+    "width": 500,
+    "height": 373
   },
   {
-    "url": "https://cataas.com/cat/funny?width=900&height=600"
+    "id": "7kr",
+    "url": "https://cdn2.thecatapi.com/images/7kr.jpg",
+    "width": 640,
+    "height": 428
   },
   {
-    "url": "https://cataas.com/cat/says/hello?width=900&height=600"
+    "id": "afc",
+    "url": "https://cdn2.thecatapi.com/images/afc.jpg",
+    "width": 720,
+    "height": 960
   },
   {
-    "url": "https://cataas.com/cat/gif"
+    "id": "ast",
+    "url": "https://cdn2.thecatapi.com/images/ast.jpg",
+    "width": 500,
+    "height": 375
+  },
+  {
+    "id": "b9e",
+    "url": "https://cdn2.thecatapi.com/images/b9e.jpg",
+    "width": 500,
+    "height": 375
+  },
+  {
+    "id": "dan",
+    "url": "https://cdn2.thecatapi.com/images/dan.jpg",
+    "width": 500,
+    "height": 335
+  },
+  {
+    "id": "dvu",
+    "url": "https://cdn2.thecatapi.com/images/dvu.jpg",
+    "width": 897,
+    "height": 1200
+  },
+  {
+    "id": "p6x60nX6U",
+    "url": "https://cdn2.thecatapi.com/images/p6x60nX6U.jpg",
+    "width": 1032,
+    "height": 774
+  },
+  {
+    "id": "Z6mrcccZv",
+    "url": "https://cdn2.thecatapi.com/images/Z6mrcccZv.jpg",
+    "width": 1188,
+    "height": 792
   }
 ]
