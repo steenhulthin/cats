@@ -16,40 +16,21 @@ import streamlit as st
 # ------------------------------------------------------------
 # 1) Helpers
 # ------------------------------------------------------------
-CAT_IMAGES_CACHE_FILE = Path("api_cache/cat_images_response.json")
-CAT_FACT_CACHE_FILE = Path("api_cache/cat_fact_response.json")
-
-DEFAULT_CAT_IMAGES_RESPONSE = [
-    {"url": "https://cataas.com/cat?width=900&height=600"},
-    {"url": "https://cataas.com/cat/cute?width=900&height=600"},
-    {"url": "https://cataas.com/cat/funny?width=900&height=600"},
-    {"url": "https://cataas.com/cat/says/hello?width=900&height=600"},
-    {"url": "https://cataas.com/cat/gif"},
-]
-DEFAULT_CAT_FACT_RESPONSE = {
-    "fact": "Cats sleep for around 12-16 hours each day.",
-    "length": 43,
-}
+CAT_IMAGES_FILE = Path("api_cache/cat_images_response.json")
+CAT_FACT_FILE = Path("api_cache/cat_fact_response.json")
 
 
-def save_json_cache(path: Path, payload: object) -> None:
-    """Persist API JSON payload to disk."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as cache_file:
-        json.dump(payload, cache_file, ensure_ascii=False, indent=2)
-
-
-def load_json_cache(path: Path, default_payload: object) -> object:
-    """Load JSON payload from disk; return defaults if file is unavailable."""
+def load_json_file(path: Path) -> object | None:
+    """Load JSON payload from disk; returns None if unavailable/invalid."""
     try:
         with path.open("r", encoding="utf-8") as cache_file:
             return json.load(cache_file)
     except (OSError, json.JSONDecodeError):
-        return default_payload
+        return None
 
 
 def get_cat_urls(limit: int = 8) -> list[str]:
-    """Fetches cat images from API; uses disk cache only as fallback."""
+    """Fetches cat images from API; loads local fallback file if request fails."""
     try:
         response = requests.get(
             "https://api.thecatapi.com/v1/images/search",
@@ -60,9 +41,10 @@ def get_cat_urls(limit: int = 8) -> list[str]:
         data = response.json()
         if not isinstance(data, list):
             raise ValueError("Cat image response is not a list")
-        save_json_cache(CAT_IMAGES_CACHE_FILE, data)
     except (requests.RequestException, ValueError):
-        data = load_json_cache(CAT_IMAGES_CACHE_FILE, DEFAULT_CAT_IMAGES_RESPONSE)
+        data = load_json_file(CAT_IMAGES_FILE)
+        if not isinstance(data, list):
+            return []
 
     urls = [item.get("url") for item in data if isinstance(item, dict)]
     urls = [url for url in urls if isinstance(url, str) and url]
@@ -70,16 +52,17 @@ def get_cat_urls(limit: int = 8) -> list[str]:
 
 
 def get_cat_fact() -> str:
-    """Fetches a cat fact from API; uses disk cache only as fallback."""
+    """Fetches a cat fact from API; loads local fallback file if request fails."""
     try:
         response = requests.get("https://catfact.ninja/fact", timeout=10)
         response.raise_for_status()
         data = response.json()
         if not isinstance(data, dict):
             raise ValueError("Cat fact response is not an object")
-        save_json_cache(CAT_FACT_CACHE_FILE, data)
     except (requests.RequestException, ValueError):
-        data = load_json_cache(CAT_FACT_CACHE_FILE, DEFAULT_CAT_FACT_RESPONSE)
+        data = load_json_file(CAT_FACT_FILE)
+        if not isinstance(data, dict):
+            return "Cats are mysterious and adorable."
 
     if isinstance(data, dict):
         return data.get("fact", "Cats are mysterious and adorable.")
