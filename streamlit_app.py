@@ -55,36 +55,35 @@ except requests.RequestException:
     st.info("Cat fact: Could not load a fact right now. Try refreshing.")
 
 
+# Keep a stable batch of cats across reruns
+if "cat_urls" not in st.session_state:
+    st.session_state.cat_urls = get_random_cats()
+if "carousel_index" not in st.session_state:
+    st.session_state.carousel_index = 0
+
 # Button to force a fresh fetch
 if st.button("\U0001F504 Refresh now"):
-    cat_urls = get_random_cats()
-else:
-    # Load once at start (cached for the session)
-    @st.cache_resource(show_spinner=False)
-    def cached_cats() -> list[str]:
-        return get_random_cats()
+    st.session_state.cat_urls = get_random_cats()
+    st.session_state.carousel_index = 0
 
-    cat_urls = cached_cats()
-
+cat_urls = st.session_state.cat_urls
 
 # ------------------------------------------------------------
-# 3) Carousel loop - rotate through the list
+# 3) Carousel - one image shown in a fixed placeholder
 # ------------------------------------------------------------
-cols = st.columns(4)  # 4 images per row
-idx = 0  # start at first image
+if not cat_urls:
+    st.warning("No cat images available right now. Try refreshing.")
+    st.stop()
 
-while True:
-    # Show the current slice (4 images)
-    slice_urls = cat_urls[idx : idx + 4]
-    for col, img_url in zip(cols, slice_urls):
-        col.image(img_url, width="stretch")
+carousel_placeholder = st.empty()
+current_idx = st.session_state.carousel_index % len(cat_urls)
+carousel_placeholder.image(
+    cat_urls[current_idx],
+    width="stretch",
+    caption=f"Cat {current_idx + 1} / {len(cat_urls)}",
+)
 
-    # Advance index (wrap around)
-    idx = (idx + 4) % len(cat_urls)
-
-    # Wait a few seconds before the next frame
-    time.sleep(5)
-
-    # Clear the old images before drawing the next set
-    for c in cols:
-        c.empty()
+# Auto-advance the carousel every 5 seconds
+time.sleep(5)
+st.session_state.carousel_index = (current_idx + 1) % len(cat_urls)
+st.rerun()
